@@ -613,7 +613,7 @@ void setup()
 //Page 13 - Startup sequence
 
 // (1) 
-  as_config(CONTROLREGISTER, AS1130CONFIG, 0x01);  // 0b00000001 = ram config 1 (Table 20, Page 25)
+  as_config(CONTROLREGISTER, AS1130CONFIG, 0x01);  // (Table 20, Page 25)
 // (2) 
 int data = 0;
  for (int i=0x01; i<=0x24; i++)    // 0x01 to 0x24 are the addresses of the frames (0-35)
