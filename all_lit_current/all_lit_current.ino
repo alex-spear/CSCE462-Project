@@ -595,7 +595,7 @@ void setup()
   Wire.begin();                     // start up I2C bus
 
 // (1) define ram configuration
-  as_config(CONTROLREGISTER, AS1130CONFIG, 0x01);  // 0b00000001 = ram config 1 (Table 20, Page 25)
+  as_config(CONTROLREGISTER, AS1130CONFIG, 0x01);  // 0b00000001 = ram config 1 (Table 20, Page 25) - makes 36 frames usable
 // (2) Fill frames with data
 int data = 0;
  for (int i=0x01; i<=0x24; i++)    // 0x01 to 0x24 are the addresses of the frames (0-35)
@@ -651,7 +651,7 @@ void loop()
     
     as_config(CONTROLREGISTER, MOVIEMODE, 0b00100011);     // number of frames to play (Table 16, Page 22)
     as_config(CONTROLREGISTER, FRAMETIME, rate);     //delay time between frames (Table 17, Page 23)
-    as_config(CONTROLREGISTER, DISPLAYOPTION, 0b11101011); // play movie endlessly and scan CS0 to CS11 in each frame (Table 18, Page 24)
+    as_config(CONTROLREGISTER, DISPLAYOPTION, 0b00101011); // play movie once and scan CS0 to CS11 in each frame (Table 18, Page 24)
     as_config(CONTROLREGISTER, MOVIE, 0b01000000);         // start movie - first frame is chosen by 1st 6 bits (Table 16, Page 22)
   }
   //speed up the animations
@@ -659,7 +659,7 @@ void loop()
     uint8_t speed = 0b00000001;
     as_config(CONTROLREGISTER, MOVIEMODE, 0b00100011);     // number of frames to play (Table 16, Page 22)
     as_config(CONTROLREGISTER, FRAMETIME, rate);     //delay time between frames (Table 17, Page 23)
-    as_config(CONTROLREGISTER, DISPLAYOPTION, 0b11101011); // play movie endlessly and scan CS0 to CS11 in each frame (Table 18, Page 24)
+    as_config(CONTROLREGISTER, DISPLAYOPTION, 0b00101011); // play movie endlessly and scan CS0 to CS11 in each frame (Table 18, Page 24)
     as_config(CONTROLREGISTER, MOVIE, 0b01000000); 
   }
     
