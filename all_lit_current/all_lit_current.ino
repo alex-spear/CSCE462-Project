@@ -632,33 +632,36 @@ int data = 0;
   as_config(CONTROLREGISTER, CURRENTSOURCE, 0xFF);       // brightness current set to 30mA (Table 19, Page 24)
 // (7) Define Display Options
 //  as_config(CONTROLREGISTER, PICTURE, 0b01001000);       // 0b01000000 = display picture (bits 0 - 5 are frame number to display (Table 14, Page 21)
-as_config(CONTROLREGISTER, MOVIEMODE, 0b00100011);     // number of frames to play (Table 16, Page 22)
-    as_config(CONTROLREGISTER, FRAMETIME, 0b00001111);     //delay time between frames (Table 17, Page 23)
-    as_config(CONTROLREGISTER, DISPLAYOPTION, 0b11101011); // play movie endlessly and scan CS0 to CS11 in each frame (Table 18, Page 24)
-    as_config(CONTROLREGISTER, MOVIE, 0b01000000);         // start movie - first frame is chosen by 1st 6 bits (Table 16, Page 22)
+//    as_config(CONTROLREGISTER, MOVIEMODE, 0b00100011);     // number of frames to play (Table 16, Page 22)
+//    as_config(CONTROLREGISTER, FRAMETIME, 0b00001111);     //delay time between frames (Table 17, Page 23)
+//    as_config(CONTROLREGISTER, DISPLAYOPTION, 0b11101011); // play movie endlessly and scan CS0 to CS11 in each frame (Table 18, Page 24)
+//    as_config(CONTROLREGISTER, MOVIE, 0b01000000);         // start movie - first frame is chosen by 1st 6 bits (Table 16, Page 22)
   
 }
 
 void loop() 
 {
-  //int sensor = analogRead(A0);
-  //Serial.println(sensor);
+  int sensor = analogRead(A0);
+  Serial.println(sensor);
 // (8) Start Display  
-
+  uint8_t rate = 0b00001111;
+  //uint8_t current_frame = 0b01000000;
   as_config(CONTROLREGISTER, SHUTDOWNOPENSHORT, 0b00000011); // Enable the LEDs (ie make them visible)
- /* if(sensor > 100){
-    as_config(CONTROLREGISTER, MOVIEMODE, 0b00010000);     // number of frames to play (Table 16, Page 22)
-    as_config(CONTROLREGISTER, FRAMETIME, 0b00001111);     //delay time between frames (Table 17, Page 23)
+  if(sensor > 800){
+    
+    as_config(CONTROLREGISTER, MOVIEMODE, 0b00100011);     // number of frames to play (Table 16, Page 22)
+    as_config(CONTROLREGISTER, FRAMETIME, rate);     //delay time between frames (Table 17, Page 23)
     as_config(CONTROLREGISTER, DISPLAYOPTION, 0b11101011); // play movie endlessly and scan CS0 to CS11 in each frame (Table 18, Page 24)
     as_config(CONTROLREGISTER, MOVIE, 0b01000000);         // start movie - first frame is chosen by 1st 6 bits (Table 16, Page 22)
   }
   //speed up the animations
   else{
-    as_config(CONTROLREGISTER, MOVIEMODE, 0b00010000);     // number of frames to play (Table 16, Page 22)
-    as_config(CONTROLREGISTER, FRAMETIME, 0b00000111);     //delay time between frames (Table 17, Page 23)
+    uint8_t speed = 0b00000001;
+    as_config(CONTROLREGISTER, MOVIEMODE, 0b00100011);     // number of frames to play (Table 16, Page 22)
+    as_config(CONTROLREGISTER, FRAMETIME, rate);     //delay time between frames (Table 17, Page 23)
     as_config(CONTROLREGISTER, DISPLAYOPTION, 0b11101011); // play movie endlessly and scan CS0 to CS11 in each frame (Table 18, Page 24)
     as_config(CONTROLREGISTER, MOVIE, 0b01000000); 
-  }*/
+  }
     
 }
 
